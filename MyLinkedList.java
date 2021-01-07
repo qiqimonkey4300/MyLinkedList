@@ -46,13 +46,45 @@ public class MyLinkedList {
     }
   }
 
-  //public String get(int index) {}
+  public String get(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("This index isn't allowed");
+    }
+    return getNode(index).getData();
+  }
 
-  //public String set(int index, String value) { }
+  public String set(int index, String value) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("This index isn't allowed");
+    }
+    String t = get(index);
+    getNode(index).setData(value);
+    return t;
+  }
 
-  //public String toString() {}
+  public String toString() {
+    String x = "[";
+    Node current = start;
+    while (current != null) {
+      x += current.getData() + ", ";
+      current = current.getNext();
+    }
+    x = x.substring(0, x.length()-2);
+    x += "]";
+    return x;
+  }
 
-  //public String toStringReversed() { }
+  public String toStringReversed() {
+    String x = "[";
+    Node current = end;
+    while (current != null) {
+      x += current.getData() + ", ";
+      current = current.getPrev();
+    }
+    x = x.substring(0, x.length()-2);
+    x += "]";
+    return x;
+  }
 
   //Any helper method that returns a Node object MUST BE PRIVATE!
   private Node getNode(int index) {
