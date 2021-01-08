@@ -86,6 +86,29 @@ public class MyLinkedList {
     return x;
   }
 
+  public String remove(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("This index isn't allowed");
+    }
+    String t = get(index);
+    if (size == 1) {
+      start = null;
+      end = null;
+    } else if (index == 0) {
+      getNode(1).setPrev(null);
+      start = getNode(1);
+    } else if (index == size - 1) {
+      getNode(index - 1).setNext(null);
+      end = getNode(index - 1);
+    } else {
+      getNode(index - 1).setNext(getNode(index + 1));
+      getNode(index + 1).setPrev(getNode(index - 1));
+    }
+    size--;
+    return t;
+  }
+
+  //public void extend(MyLinkedList other) { }
   //Any helper method that returns a Node object MUST BE PRIVATE!
   private Node getNode(int index) {
     Node current = start;
