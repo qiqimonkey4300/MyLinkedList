@@ -69,7 +69,8 @@ public class MyLinkedList {
       x += current.getData() + ", ";
       current = current.getNext();
     }
-    x = x.substring(0, x.length()-2);
+    if (x.length() > 1) x = x.substring(0, x.length()-2);
+    else x = x.substring(0, 1);
     x += "]";
     return x;
   }
@@ -81,7 +82,8 @@ public class MyLinkedList {
       x += current.getData() + ", ";
       current = current.getPrev();
     }
-    x = x.substring(0, x.length()-2);
+    if (x.length() > 1) x = x.substring(0, x.length()-2);
+    else x = x.substring(0, 1);
     x += "]";
     return x;
   }
@@ -108,7 +110,21 @@ public class MyLinkedList {
     return t;
   }
 
-  //public void extend(MyLinkedList other) { }
+  public void extend(MyLinkedList other) {
+    if (size == 0) {
+      start = other.start;
+      end = other.end;
+    } else if (other.size > 0) {
+      end.setNext(other.start);
+      other.start.setPrev(end);
+      end = other.end;
+    }
+    size += other.size();
+    other.size = 0;
+    other.start = null;
+    other.end = null;
+  }
+
   //Any helper method that returns a Node object MUST BE PRIVATE!
   private Node getNode(int index) {
     Node current = start;
