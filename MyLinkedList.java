@@ -103,8 +103,10 @@ public class MyLinkedList {
       getNode(index - 1).setNext(null);
       end = getNode(index - 1);
     } else {
-      getNode(index - 1).setNext(getNode(index + 1));
-      getNode(index + 1).setPrev(getNode(index - 1));
+      Node front = getNode(index - 1);
+      Node back = getNode(index + 1);
+      front.setNext(back);
+      back.setPrev(front);
     }
     size--;
     return t;
